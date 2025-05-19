@@ -1,11 +1,11 @@
-FROM ubuntu:24
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y \
+FROM alpine:3.21.3
+
+RUN apk add --no-cache \
     curl \
     tar \
     gzip \
     git \
-    && rm -rf /var/lib/apt/lists/*
+    bash # Adding bash for more robust scripting capabilities in your CI jobs
 
 # --- Install Kube-linter ---
 ARG KUBELINTER_VERSION="v0.7.2"
@@ -17,4 +17,4 @@ ARG KUSTOMIZE_VERSION="5.6.0"
 RUN curl -sSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" | tar xz -C /usr/local/bin && \
     chmod +x /usr/local/bin/kustomize
 
-ENTRYPOINT ["/bin/bash"] 
+ENTRYPOINT ["/bin/bash"]
