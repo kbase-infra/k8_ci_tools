@@ -18,7 +18,7 @@ RUN uv python install --default && \
 
 # --- Install Kube-linter ---
 ARG KUBELINTER_VERSION="v0.8.3"
-RUN curl -sSL "https://github.com/stackrox/kube-linter/releases/download/${KUBELINTER_VERSION}/kube-linter-linux" -o /usr/local/bin/kube-linter && \
+RUN curl --fail -sSL "https://github.com/stackrox/kube-linter/releases/download/${KUBELINTER_VERSION}/kube-linter-linux" -o /usr/local/bin/kube-linter && \
     chmod +x /usr/local/bin/kube-linter
 
 # --- Install Kustomize ---
