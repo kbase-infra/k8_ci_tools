@@ -13,7 +13,7 @@ RUN apk add --no-cache \
 COPY --from=uv /uv /uvx /usr/local/bin/
 ENV UV_PYTHON_INSTALL_DIR=/opt/python \
     UV_PYTHON_PREFERENCE=only-managed
-RUN uv python install --default --preview && \
+RUN uv python install --default && \
     ln -sf "$(uv python find)" /usr/local/bin/python3
 
 # --- Install Kube-linter ---
